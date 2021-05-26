@@ -4,6 +4,7 @@ package com.example.demo2.api.controller;
 import com.example.demo2.domain.model.Lancamento;
 import com.example.demo2.domain.repository.LancamentoRepository;
 import com.example.demo2.domain.repository.filter.LancamentoFilter;
+import com.example.demo2.domain.repository.projection.ResumoLancamento;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +33,12 @@ public class LancamentoController {
 
         return lancamentoRepository.filtar(lancamentoFilter,pageable);
 
+    }
+
+    @GetMapping(params = "resumo")
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_LANCAMENTO') and #oauth2.hasScope('read')")
+    public Page<ResumoLancamento> resumir(LancamentoFilter lancamentoFilter, Pageable pageable) {
+        return lancamentoRepository.resumir(lancamentoFilter, pageable);
     }
 
     @GetMapping("/{codigo}")
