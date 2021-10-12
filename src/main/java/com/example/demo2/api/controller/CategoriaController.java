@@ -32,11 +32,11 @@ public class CategoriaController {
 
     }
 
-    @GetMapping("/{idCategoria}")
+    @GetMapping("/{codigo}")
     @PreAuthorize("hasAuthority('ROLE_PESQUISAR_CATEGORIA')and #oauth2.hasScope('read')")
-    public ResponseEntity<Categoria> buscarPeloId(@PathVariable Long idCategoria){
+    public ResponseEntity<Categoria> buscarPeloId(@PathVariable Long codigo){
 
-        Optional<Categoria> categoriaId  = categoriaRepository.findById(idCategoria);
+        Optional<Categoria> categoriaId  = categoriaRepository.findById(codigo);
         return categoriaId.map(ResponseEntity::ok).orElseGet(()-> ResponseEntity.notFound().build());
     }
 
@@ -45,7 +45,7 @@ public class CategoriaController {
     public ResponseEntity<Categoria> adicionar(@Valid @RequestBody Categoria categoria, UriComponentsBuilder builder){
 
         Categoria categoriaSalva = categoriaRepository.save(categoria);
-        URI uri = builder.path("/categorias/{id}").buildAndExpand(categoria.getId()).toUri();
+        URI uri = builder.path("/categorias/{id}").buildAndExpand(categoria.getCodigo()).toUri();
         return ResponseEntity.created(uri).body(categoriaSalva);
 
     }

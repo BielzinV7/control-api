@@ -21,11 +21,8 @@ public class Lancamento {
 
     private String descricao;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataVencimento;
 
-    @NotNull
-    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataPagamento;
 
     @NotNull
@@ -39,11 +36,11 @@ public class Lancamento {
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "id_categoria")
+    @JoinColumn(name = "codigo_categoria")
     private Categoria categoria;
 
     @NotNull
     @ManyToOne
-    @JoinColumn(name = "id_pessoa")
+    @JoinColumn(name = "codigo_pessoa")
     private Pessoa pessoa;
 }

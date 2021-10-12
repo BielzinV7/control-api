@@ -16,7 +16,7 @@ public class Pessoa {
     @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long id;
+    private Long codigo;
 
     @NotNull
     @NotBlank

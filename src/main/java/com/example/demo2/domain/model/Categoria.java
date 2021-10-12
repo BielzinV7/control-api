@@ -20,7 +20,7 @@ public class Categoria {
     @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long codigo;
 
     @NotNull
     @Size(min = 3, max = 20)
